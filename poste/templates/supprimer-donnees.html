@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+<section>
+   
+   <div class="container">
+    {% block corps %}
+    <h2>Vous êtes sur le point d'effacer un article <small style="color: rgb(200, 200, 6);" >Cette action n'est pas reverssible</small></h2>
+  
+    <form action="{% url 'supprimerArticle' item.id%}" method="post" >
+        {% csrf_token %}
+        <a class="btn btn-warning" href="{% url 'principale' %}">Annuler la suppresion</a>
+        <button class="btn btn-danger">Confirmer la suppression </button>
+    </form>
+   </div>
+        {% endblock %}
+</section>
+<!-- <input class="btn btn-danger" type="submit" name="Confirmer la suppression"> -->
+{% include 'footer.html' %}

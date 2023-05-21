@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block corps %}
+<section style="text-align: center; color: rgb(35, 39, 39); background-color: antiquewhite;">
+    <section style="background-color: calc();">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div>
+                        <h1>Voici les détails de l'article <span style="color: rgb(11, 87, 239);">{{article.id}}</span>
+                        </h1>
+                        <img src="{{article.image.url}}" alt="" style="width: 500px;">
+                        <div class="col-md-7 mx-auto text-center">
+                            <h1> Titre :<span style="color: rgb(200, 200, 6);">{{article.titre}}</span> </h1>
+                            <h2 style="color: rgb(200, 200, 6);"> Description :</h2>
+                            <h3> {{article.desc}} </h3><br>
+                            <strong>Publié il y a {{article.date_creation|timesince}}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h2>Les postes identiques</h2>
+                    <div class="row">
+                        {% for x in articlesEnRelation %}
+                        {% comment %} La condition if est pour trier de la sorte que si
+                         l'article qui affiché ne puisse plus apparaitre dans la liste de
+                          articles identiques {% endcomment %}
+                        {% comment %} La condition est faite entre l'id des postes identiques à droite ,
+                         et l'id du poste principale à gauche {% endcomment %}
+                        {% if x.id != article.id %}
+                        <div class="col-md-8 mb-3">
+                            <a href="{% url 'detail' article.id %}">
+                            <img src="{{x.image.url}}" alt="" style="max-width: 250px;">
+                            </a> 
+                        </div>
+                        <div class="col-4">
+                            <strong style="color: blue;">{{x.titre}}</strong>
+                            {{x.desc|truncatewords:10}}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+{% endblock %}
+{% include 'footer.html' %}
+<!-- <hr> -->
+<!-- <h3>Commentaires</h3>
+            
+            {% for x in commentaires %}
+                <article>   
+                    <strong class="text-align-left text-success">{{x.nom}}</strong>  {{x.date_creation|timesince}}
+                    <p style="font-family: Arial, Helvetica, sans-serif;">{{x.corps}}</p>
+            {% empty %}
+                     <p>Pas de commentaire</p> 
+                </article>    
+             {% endfor %}    
+                        -->
+
+
+<!-- <h3 class="mx-5">Ajouter un nouveau commentaire</h3>
+            <form class="form-control form-comtrol-lg" action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn text-white bg-primary">commenter</button>
+            </form> -->

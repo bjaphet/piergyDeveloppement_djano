@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messagerie</title>
+    <link rel="stylesheet" href="{% static 'css/style_forms.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="wrapper">
+        <section class="form signup">
+        <header>Bienvenue sur piergyDeveloppement</header>
+            <form action="#" method='post'>
+                {% csrf_token %}
+                    <div class="field input">
+                        <label>Titre</label>
+                        <input type="text" placeholder="Entrez le titre" name='titre' value="{{article.titre}}" required>>
+                    </div>
+                    <div class="field input">
+                        <label style="font-size: large; font-family: Arial, Helvetica, sans-serif;">Catégories</label>
+                        <select name="categorie" id="categorie" required>
+                            {% for categorie in categories %}
+                                <option value="{{categorie.pk }}" 
+                                    {% if categorie.pk == article.categorie.pk %}selected
+                                    {% endif %}>
+                                    {{categorie.nom }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="field input">
+                        <label style="font-size: large; font-family: Arial, Helvetica, sans-serif;">Description</label>
+                        <textarea  placeholder="Entrez le corps de votre poste "name="desc" id="" cols="30" rows="10" value="" required>{{article.desc}}</textarea>
+                    </div>
+                    <div class="field input">
+                        <label>Numéro</label>
+                        <input type="text" placeholder="242065722803" name='num' value="{{article.num}}" required>>
+                    </div>
+                <!--Pour rentrer les fichiers pris depuis le disque dure ou autre support-->
+                    <div class="field image">
+                        <label  style="font-size: large; font-family: Arial, Helvetica, sans-serif;">Selectionnez une image pour votre poste</label>
+                        <input type="file" name="image" id="image" value="{{article.image}}">
+                    </div>
+                    <div class="field boutton">
+                         <input type="submit" value="Enregistrer">
+                    </div>
+            </form>
+        </section>
+    </div>
+</body>
+</html>

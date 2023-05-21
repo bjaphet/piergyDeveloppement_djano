@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block corps %}
+  {% comment %} Header pour l'image et le text {% endcomment %}
+
+    {% comment %} <section style="text-align: center;" style="background-color: rgb(232, 182, 121);"> {% endcomment %}
+                
+                
+    <section class="content-section" id="portfolio" style="background-color: calc(); color: rgb(63, 71, 156);">
+        <div class="container">
+            <!-- <h1>Bienvenue sur le blog</h1>
+            <h2>Ici nous apprennons tous des autres </h2>
+        </div> -->
+        <div class="container px-4 px-lg-5">
+            <div class="content-section-heading text-center">
+                <h3 class="text-secondary mb-0"> <piergyDeveloppement class="card-body">Bienvenue</piergyDeveloppement> </h3>
+                <h2 class="mb-5">Annonces récemment mis en ligne</h2>
+                {% if messages %}
+                {% for message in messages  %}
+                        <h2><strong style="color: green;"> {{message}}</strong> </h2> <h3 style="color: blue;">{{request.user}}</h3>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="container" >
+                <div class="row">
+                    {% for article in object_list  %}
+                        <div class="col-12 col-md-6 col-lg-3 col-xl-3 " style=" width: 500px; background-color: rgb(222, 159, 34);">
+                                <div class="card md-5 p-3" >
+                                    <!-- Image de la carte et entete-->
+                                        <!-- si il ya une image affiche cela et si ce n'est pas le cas affiche une image par défaut -->
+                                        {% if article.image %}
+                                        <a href="{% url 'detail' article.id %}"> 
+                                            <img class="card-img-top" src="{{ article.image.url }}" alt="piergyDeveloppement" >
+                                        {% else %}
+                                        <a href="{% url 'detail' article.id %}">
+                                        <h4>Aucune image pour ce poste</h4> 
+                                         {% endif %}
+                                    </a>
+                                    <!-- <img class="card-img-top" src=" #" alt="piergyDeveloppement" > -->
+                                    <div class="card-body">
+                                    <!-- Corps de la carte -->
+                                        <!-- Titre de la carte -->
+                                        <h5 class="card-title"> {{article.titre}}</h5>
+                                        <!-- Texte de descriotion -->
+                                    <p class="card-text">{{article.desc|truncatewords:8}}</p>
+                                    <!-- La date de publication -->
+                                    <p class="card-text">Publié il y a {{article.date_creation|timesince}} </p>
+                                    <!-- Contacte -->
+                                    <!-- Boutton -->
+                                   <div>
+                                    <p >
+                                        <a href="{% url 'detail' article.id %}" class="btn btn-primary">Details</a>
+                                        <a href="{% url 'modif' article.id %}" class="btn btn-success">Modifier</a>   
+                                        <a href="{% url 'supprimerArticle' article.id%}" class="btn btn-danger">Effacer</a>
+                                        <a href="https://wa.me/article.num">
+                                          <img src="{% static 'assets/whatsapp.png' %}" alt="Logo whatsapp pour me contacter" style="width: 150px;  height: 150px;">
+                                        </a>
+                                    </p>
+                                    <p>
+                                       
+                                    </p>
+                                   </div>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+                    </div>
+                </div>
+        </div>
+    </section>
+    <div>
+        <nav class="my-4" aria-label="...">
+          <!-- signifie s'il a encore des pages a affiché -->
+          {% if is_paginated %}
+          <ul class="pagination  justify-content-center">
+            <!-- S'il a une page précedente alors on active le bouttons -->
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="{% url 'principale' %}?page={{ page_obj.previous_page_number }}" tabindex="-1"
+                aria-disabled="true">Precedent</a>
+            </li>
+            <!-- Le qui donne le num de la page precedente -->
+            <li class="page-item"><a class="page-link" href="#">{{ page_obj.previous_page_number}}</a></li>
+            {% endif %}
+    
+    
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="#">{{ page_obj.number }}<span class="sr-only"></span></a>
+            </li>
+    
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="#">{{ page_obj.next_page_number}}</a></li>
+            <li class="page-item">
+              <a class="page-link" href="{% url 'principale' %}?page={{ page_obj.next_page_number}}">suivant</a>
+            </li>
+            {% endif %}
+          </ul>
+          {% endif %}
+        </nav>
+      </div>
+    
+{% endblock corps %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer %}

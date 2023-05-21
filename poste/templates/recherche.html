@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block corps %}
+<div class="container">
+    <h1>Liste de recherche</h1>
+    {% for x in list_article %}
+    <div class="col-12 col-md 6 col-lg-3 col-xl-3 " style=" width: 50%;">
+        <div class="card md-5 p-3" >
+            <!-- Image de la carte et entete-->
+                <!-- si il ya une image affiche cela et si ce n'est pas le cas affiche une image par défaut -->
+                {% if x.image %}
+                <a href="{% url 'detail' x.id %}"> 
+                    <img class="card-img-top" src="{{ x.image.url }}" alt="piergyDeveloppement" >
+                {% else %}
+                <a href="{% url 'detail' x.id %}">
+                <h4>Aucune image pour ce poste</h4> 
+                 {% endif %}
+            </a>
+            <!-- <img class="card-img-top" src=" #" alt="piergyDeveloppement" > -->
+            <div class="card-body">
+            <!-- Corps de la carte -->
+                <!-- Titre de la carte -->
+                <h5 class="card-title"> {{x.titre}}</h5>
+                <!-- Texte de descriotion -->
+            <p class="card-text">{{x.desc|truncatewords:8}}</p>
+            <!-- La date de publication -->
+            <p class="card-text">Publié il y a {{x.date_creation|timesince}} </p>
+            <!-- Boutton -->
+           <div>
+            <p >
+                <a href="{% url 'detail' x.id %}" class="btn btn-primary">Details</a>
+                <a href="{% url 'modif' x.id %}" class="btn btn-success">Modifier</a>   
+                <a href="{% url 'supprimerArticle' x.id%}" class="btn btn-danger">Effacer</a>
+            </p>
+            <p>
+               
+            </p>
+           </div>
+            </div>
+        </div>
+    </div>
+        <hr>
+    {% endfor %}
+</div>
+    
+{% endblock %}
+{% include 'footer.html' %}

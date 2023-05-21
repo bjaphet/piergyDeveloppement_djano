@@ -1,0 +1,18 @@
+<!-- {% url '' %}?page={{ page_obj.previous_page_number}} -->
+<!-- {% url '' %}?page={{ page_obj.next_page_number }} -->
+*<!-- {% if is_paginated %} -->
+*
+*<!-- {% if page_obj.has_previous %} -->
+*
+*<!-- {% endif %} -->
+*
+*
+*<!-- {% if page_obj.has_next %}  -->     <!-- {% endif %} -->
+             
+<!-- {% endif %}   -->{{ page_obj.number }} {{ page_obj.previous_page_numbe }}{{ page_obj.next_page_number }}
+*
+*
+* path('',HomePage.as_view() ,name='homepage'),
+path('apropospage/',AproposPage,name='apropospage'),
+path('article/<str:pk>', details ,name='detail'),
+*

@@ -1,0 +1,56 @@
+
+
+
+<section class="form signup">
+    <header>Ajout de poste</header>
+    <form action="#" method="post">
+        {% csrf_token %}
+        <div class="field input">
+            <label style="font-size: large; font-family: Arial, Helvetica, sans-serif;">Titre</label>
+            <input type="text" placeholder="Entrez le titre du poste" name="titre">
+        </div>
+        
+        <div class="field input">
+            <label style="font-size: large; font-family: Arial, Helvetica, sans-serif;">Description</label>
+            <textarea placeholder="Entrez le corps de votre poste "name="desc" id="" cols="30" rows="10"></textarea>
+        </div>
+        
+        <!--Pour rentrer les fichiers pris depuis le disque dure ou autre support-->
+        <div class="field image">
+        <label style="font-size: large; font-family: Arial, Helvetica, sans-serif;">Selectionnez une image pour votre poste</label>
+        <input type="file" name="image">
+        </div>
+        <div class="field boutton">
+        <input type="submit" value="Enregistrer">
+        </div>
+    </form>
+
+</section>
+</div>
+
+
+
+<!-- <section class="form signup">
+    <header>Modification du poste</header>
+    <form action="{% url 'modif' article.id %}" method="post" enctype="multipart/form-data">
+        <form action="#" method="post">
+            {% csrf_token %}
+            <div class="field input">
+                <label style="font-size: large; font-family: Arial, Helvetica, sans-serif;">Titre</label>
+                <input type="text" placeholder="Entrez le titre du poste" name="titre" value="article.titre">
+            </div>
+            
+            <div class="field input">
+                <label style="font-size: large; font-family: Arial, Helvetica, sans-serif;">Description</label>
+                <textarea value="article.desc" placeholder="Entrez le corps de votre poste "name="desc" id="" cols="30" rows="10"></textarea>
+            </div> -->
+            
+            <!-- Pour rentrer les fichiers pris depuis le disque dure ou autre support
+            <div class="field image">
+            <label  style="font-size: large; font-family: Arial, Helvetica, sans-serif;">Selectionnez une image pour votre poste</label>
+            <input type="file" name="image" value="article.image">
+            </div>
+            <div class="field boutton">
+            <input type="submit" value="Enregistrer">
+            </div>
+    </form> -->
